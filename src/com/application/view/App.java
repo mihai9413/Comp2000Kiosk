@@ -30,6 +30,7 @@ public class App extends AbstractView {
     private JButton loginButton;
     private JButton logout;
 
+
     Admin admin = new Admin();
 
     public App() {
@@ -96,7 +97,7 @@ tabbedPane.setEnabledAt(1,false);
             public void actionPerformed(ActionEvent e) {
 
             admin.Login(username.getText(),password.getText(),tabbedPane);
-
+                tabbedPane.setEnabledAt(0,false);
             }
         });
         addProductButton.addActionListener(new ActionListener() {
@@ -108,20 +109,26 @@ tabbedPane.setEnabledAt(1,false);
 
             }
         });
-        removeProductButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-            }
-        });
         logout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 tabbedPane.setEnabledAt(1,false);
+                tabbedPane.setEnabledAt(0,true);
+
                 tabbedPane.setSelectedIndex(0);
                 username.setText("");
                 password.setText("");
 
+
+
+            }
+        });
+        removeProductButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+           admin.RemoveItem(Integer.parseInt(barcodeField.getText()));
+                Main.load();
 
             }
         });

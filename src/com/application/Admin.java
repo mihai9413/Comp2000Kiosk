@@ -2,12 +2,17 @@ package com.application;
 
 import javax.swing.*;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Admin extends JFrame {
 
     File inputFile = new File("resources\\AdminCredentials");
     File Stocktext= new File("resources\\Stock");
+
+
+
 
     public void Login(String username,String password,JTabbedPane tabbedPane){
 
@@ -76,8 +81,85 @@ public class Admin extends JFrame {
         }
 
     }
+public void RemoveItem(int barcode) {
+        try{
 
-    public void RemoveItem(){
+            Scanner findLine = new Scanner(Stocktext);
+            List<String> lines = new ArrayList<>();
+
+            while(findLine.hasNextLine()){
+                String line = findLine.nextLine();
+                if (!lines.contains(String.valueOf(barcode))){
+                    lines.add(line);
+                }
+            }
+
+            FileWriter removeStock = new FileWriter(Stocktext);
+            String lastEntry = lines.get(lines.size()-1);
+            for(String line : lines){
+                if(line.equals(lastEntry)){
+                    removeStock.write(line);
+                    break;
+                }
+                removeStock.write(line + "\n");
+            }
+            removeStock.close();
+            findLine.close();
+
+        }
+
+         catch (IOException e) {
+            e.printStackTrace();
+        }
+
+}
+//    public  void RemoveItem(String productName,String qty,String price,String barcode, int positionOfTerm)
+//    {
+//        int position = positionOfTerm - 1;
+//        String tempFile="temp.txt";
+//        File oldFile = new File("resources\\Stock");
+//        File newFile = new File(tempFile);
+//
+//        String currentLine;
+//        String data[];
+//
+//        try {
+//            FileWriter fw = new FileWriter(tempFile,true);
+//            BufferedWriter bw = new BufferedWriter(fw);
+//            PrintWriter pw = new PrintWriter(bw);
+//
+//            FileReader fr = new FileReader(oldFile);
+//            BufferedReader br = new BufferedReader(fr);
+//
+//            while ((currentLine = br.readLine()) != null){
+//
+//                data=currentLine.split("|");
+//                if(data[position].equalsIgnoreCase(productName)){
+//
+//                    pw.println(currentLine);
+//
+//                }
+//
+//            }
+//            pw.flush();
+//            pw.close();
+//            fr.close();
+//            br.close();
+//            bw.close();
+//            fw.close();
+//
+//            oldFile.delete();
+//            File dump = new File("resources\\Stock");
+//            newFile.renameTo(dump);
+//
+//        }
+//        catch (Exception e){
+//
+//        }
+
+
+//    }
+    public void EditItem(){
 
     }
 }
