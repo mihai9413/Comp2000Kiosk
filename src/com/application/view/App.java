@@ -11,6 +11,8 @@ import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class App extends AbstractView {
 
@@ -98,6 +100,8 @@ tabbedPane.setEnabledAt(1,false);
 
             admin.Login(username.getText(),password.getText(),tabbedPane);
                 tabbedPane.setEnabledAt(0,false);
+                username.setText("");
+                password.setText("");
             }
         });
         addProductButton.addActionListener(new ActionListener() {
@@ -130,6 +134,19 @@ tabbedPane.setEnabledAt(1,false);
            admin.RemoveItem(Integer.parseInt(barcodeField.getText()));
                 Main.load();
 
+            }
+        });
+        updateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+
+                    admin.EditItem(ProdName.getText(),barcodeField.getText());
+
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                Main.load();
             }
         });
     }
