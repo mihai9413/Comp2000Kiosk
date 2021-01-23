@@ -4,6 +4,10 @@ import com.application.view.App;
 
 import javax.swing.*;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -99,7 +103,8 @@ public class Admin extends JFrame {
             FileWriter removeStock = new FileWriter(Stocktext);
             String lastEntry = lines.get(lines.size() - 1);
             for (String line : lines) {
-                if (line.equals(lastEntry)) {
+                if (line.equals(lastEntry))
+                {
                     removeStock.write(line);
                     break;
 
@@ -116,12 +121,63 @@ public class Admin extends JFrame {
 
     }
 
-    public void EditItem(String PrdName,String barcode) throws IOException {
+    public void EditItem(String qty, String barcode) throws IOException {
+        try {
 
+            Scanner findLine = new Scanner(Stocktext);
+            List<String> lines = new ArrayList<>();
 
+            String separator = "\\|";
+
+            while (findLine.hasNextLine()) {
+                String line = findLine.nextLine();
+
+                if (line.contains(String.valueOf(barcode))) {
+
+                    String[] dataStock = line.split(separator);
+
+                    String dataRow = "";
+
+                    dataRow += dataStock[0];
+
+                    dataRow += "|" + qty;
+
+                    dataRow += "|" + dataStock[2];
+
+                    dataRow += "|" + dataStock[3];
+
+                    lines.add(dataRow);
+
+                }
+
+                lines.add(line);
+
+            }
+
+            FileWriter updateStock = new FileWriter(Stocktext);
+            String updateEntry = lines.get(lines.size() - 1);
+            for (String line : lines) {
+                if (line.equals(updateEntry))
+                {
+                    updateStock.write(line);
+                    System.out.println(line);
+                    break;
+
+                }
+                else {
+                    updateStock.write(line + "\n");
+                    System.out.println(line);
+                }
+            }
+            updateStock.close();
+            findLine.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-
 }
+
 
 
 

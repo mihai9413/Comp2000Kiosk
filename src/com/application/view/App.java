@@ -141,7 +141,7 @@ tabbedPane.setEnabledAt(1,false);
             public void actionPerformed(ActionEvent e) {
                 try {
 
-                    admin.EditItem(ProdName.getText(),barcodeField.getText());
+                    admin.EditItem(qtyField.getText(),barcodeField.getText());
 
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
