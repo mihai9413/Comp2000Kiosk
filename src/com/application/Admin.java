@@ -121,53 +121,53 @@ public class Admin extends JFrame {
 
     }
 
-    public void EditItem(String qty, String barcode) throws IOException {
+    public void EditItem(String productName, String qty, String price, String barcode) throws IOException {
         try {
 
             Scanner findLine = new Scanner(Stocktext);
             List<String> lines = new ArrayList<>();
 
             String separator = "\\|";
+            String dataRow = "";
+
+            dataRow += productName;
+
+            dataRow += "|" + qty;
+
+            dataRow += "|" + price;
+
+            dataRow += "|" + barcode;
 
             while (findLine.hasNextLine()) {
                 String line = findLine.nextLine();
 
+                String[] dataStock = line.split(separator);
+
                 if (line.contains(String.valueOf(barcode))) {
-
-                    String[] dataStock = line.split(separator);
-
-                    String dataRow = "";
-
-                    dataRow += dataStock[0];
-
-                    dataRow += "|" + qty;
-
-                    dataRow += "|" + dataStock[2];
-
-                    dataRow += "|" + dataStock[3];
 
                     lines.add(dataRow);
 
                 }
+                else {
+                    lines.add(line);
 
-                lines.add(line);
-
+                }
             }
 
             FileWriter updateStock = new FileWriter(Stocktext);
-            String updateEntry = lines.get(lines.size() - 1);
+            String updateEntry = lines.get(lines.size()-1 );
             for (String line : lines) {
                 if (line.equals(updateEntry))
                 {
+
                     updateStock.write(line);
-                    System.out.println(line);
+                    System.out.println(updateEntry);
                     break;
 
                 }
-                else {
+
                     updateStock.write(line + "\n");
-                    System.out.println(line);
-                }
+
             }
             updateStock.close();
             findLine.close();

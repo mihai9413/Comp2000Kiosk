@@ -59,6 +59,7 @@ public class Main {
                 models[counter].setBarcode(BarcodeToInt);
 
 
+
                 counter ++;
 
                 models = Arrays.copyOf(models, counter + 1);
@@ -75,6 +76,7 @@ public class Main {
             scanner.close();
 
 
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -87,6 +89,7 @@ public class Main {
         appView.setupEditorList(Names);
 
     }
+
 
 
 }

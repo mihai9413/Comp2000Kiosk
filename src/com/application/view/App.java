@@ -5,6 +5,7 @@ import com.Main;
 import com.application.Admin;
 import com.application.KeyValuePair;
 import com.application.controller.AbstractController;
+import com.application.model.ModelSubject;
 
 import javax.swing.*;
 import javax.swing.event.*;
@@ -31,6 +32,14 @@ public class App extends AbstractView {
     public JPasswordField password;
     private JButton loginButton;
     private JButton logout;
+    private JTextField scanbarcode;
+    private JButton scanButton;
+    private JTextArea kioskList;
+    private JTextField totalText;
+    private JButton CARDButton;
+    private JButton CASHButton;
+    private JButton CANCELButton;
+    private JPanel KioskPanel;
 
 
     Admin admin = new Admin();
@@ -141,12 +150,21 @@ tabbedPane.setEnabledAt(1,false);
             public void actionPerformed(ActionEvent e) {
                 try {
 
-                    admin.EditItem(qtyField.getText(),barcodeField.getText());
+                    admin.EditItem(ProdName.getText(),qtyField.getText(), priceField.getText()
+                            ,barcodeField.getText());
 
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
                 Main.load();
+            }
+        });
+        scanButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            Kiosk.Scan( scanbarcode.getText(),kioskList,totalText);
+
+
             }
         });
     }

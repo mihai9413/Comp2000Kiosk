@@ -52,7 +52,7 @@ public class ModelSubject implements IModelSubject {
     public void setPrice(float Price) {
         this.Price = Price;
         onPropertyChanged(new KeyValuePair(AbstractController.PRICE, this.Price));
-//        System.out.println(this.Price);
+        System.out.println(this.Price);
 
     }
 
@@ -63,7 +63,7 @@ public class ModelSubject implements IModelSubject {
     public void setBarcode(int Barcode) {
         this.Barcode = Barcode;
         onPropertyChanged(new KeyValuePair(AbstractController.BARCODE, this.Barcode));
-//        System.out.println(this.Barcode);
+        System.out.println(this.Barcode);
     }
 
 
