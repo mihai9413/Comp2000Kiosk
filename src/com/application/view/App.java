@@ -41,6 +41,8 @@ public class App extends AbstractView {
     private JButton CASHButton;
     private JButton CANCELButton;
     private JPanel KioskPanel;
+    public JTextArea lowStock;
+    private JButton showLowStockForButton;
 
 
     Admin admin = new Admin();
@@ -85,6 +87,7 @@ tabbedPane.setEnabledAt(1,false);
             @Override
             public void actionPerformed(ActionEvent e) {
                 controller.setModelProperty(new KeyValuePair(AbstractController.QUANTITY, qtyField.getText()));
+
             }
         });
 
@@ -113,6 +116,11 @@ tabbedPane.setEnabledAt(1,false);
                 tabbedPane.setEnabledAt(0,false);
                 username.setText("");
                 password.setText("");
+
+                admin.lowItems(lowStock);
+
+
+
             }
         });
         addProductButton.addActionListener(new ActionListener() {
@@ -120,6 +128,7 @@ tabbedPane.setEnabledAt(1,false);
             public void actionPerformed(ActionEvent e) {
                 admin.AddItem(ProdName.getText(),qtyField.getText(), priceField.getText()
                         ,barcodeField.getText());
+                System.out.println(ProdName.getText());
                 Main.load();
 
             }
@@ -153,7 +162,7 @@ tabbedPane.setEnabledAt(1,false);
                 try {
 
                     admin.EditItem(ProdName.getText(),qtyField.getText(), priceField.getText()
-                            ,barcodeField.getText());
+                            ,barcodeField.getText(),lowStock);
 
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
@@ -165,8 +174,8 @@ tabbedPane.setEnabledAt(1,false);
             @Override
             public void actionPerformed(ActionEvent e) {
             Kiosk.Scan( scanbarcode.getText(),kioskList,totalText);
-            Kiosk.Removefromstock(ProdName.getText(),qtyField.getText(), priceField.getText()
-                    ,scanbarcode.getText());
+
+                System.out.println(qtyField.getText());
 
             }
         });
@@ -190,6 +199,7 @@ tabbedPane.setEnabledAt(1,false);
                 Payment.cardPayment(kiosktext,totallabel);
             }
         });
+
     }
 
     public void setupEditorList(String[] names) {
@@ -221,5 +231,9 @@ tabbedPane.setEnabledAt(1,false);
 
             }
         }
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }

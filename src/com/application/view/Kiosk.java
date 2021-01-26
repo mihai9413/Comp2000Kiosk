@@ -24,16 +24,26 @@ try{
 
     Scanner in = new Scanner(ReadStocktext);
 
+
     while (in.hasNextLine()){
         String s = in.nextLine();
         String[] sArray = s.split("\\|");
 
+        String dataRow = "";
+
+        dataRow += sArray[0];
+
+        dataRow += "|" + (Integer.parseInt(sArray[1]) - 1);
+
+        dataRow += "|" + sArray[2];
+
+        dataRow += "|" + sArray[3];
 
         if(BarcodeInput.equals(sArray[3])){
 
             kioskList.append( sArray[0] + " " + quantity + " " + sArray[2] + "\n");
 
-             total = Float.parseFloat(sArray[2]) + Float.parseFloat(totalText.getText());
+            total = Float.parseFloat(sArray[2]) + Float.parseFloat(totalText.getText());
 
             totalText.setText(String.valueOf(total));
 
@@ -41,63 +51,14 @@ try{
 
     }
 
+
+
+
+
 } catch (Exception e) {
     e.printStackTrace();
 }
 
     }
-    public static void Removefromstock(String productName, String qty, String price, String barcode) {
-        try {
 
-            Scanner findLine = new Scanner(ReadStocktext);
-            List<String> lines = new ArrayList<>();
-
-            String separator = "\\|";
-            String dataRow = "";
-
-            dataRow += productName;
-
-            dataRow += "|" + (Integer.parseInt(qty) - 1);
-
-            dataRow += "|" + price;
-
-            dataRow += "|" + barcode;
-
-            while (findLine.hasNextLine()) {
-                String line = findLine.nextLine();
-
-                String[] dataStock = line.split(separator);
-
-                if (line.contains(String.valueOf(barcode))) {
-
-                    lines.add(dataRow);
-
-                }
-                else {
-                    lines.add(line);
-
-                }
-            }
-
-            FileWriter updateStock = new FileWriter(ReadStocktext);
-            String updateEntry = lines.get(lines.size()-1 );
-            for (String line : lines) {
-                if (line.equals(updateEntry))
-                {
-
-                    updateStock.write(line);
-                    break;
-
-                }
-
-                updateStock.write(line + "\n");
-
-            }
-            updateStock.close();
-            findLine.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

@@ -61,6 +61,7 @@ public class Admin extends JFrame {
     }
 
     public void AddItem(String productName, String qty, String price, String barcode) {
+
         try {
 
             FileWriter writeStock = new FileWriter(Stocktext, true);
@@ -85,6 +86,7 @@ public class Admin extends JFrame {
         }
 
     }
+
 
     public void RemoveItem(int barcode) {
         try {
@@ -121,7 +123,7 @@ public class Admin extends JFrame {
 
     }
 
-    public void EditItem(String productName, String qty, String price, String barcode) throws IOException {
+    public void EditItem(String productName, String qty, String price, String barcode, JTextArea lowStock) throws IOException {
         try {
 
             Scanner findLine = new Scanner(Stocktext);
@@ -137,6 +139,7 @@ public class Admin extends JFrame {
             dataRow += "|" + price;
 
             dataRow += "|" + barcode;
+
 
             while (findLine.hasNextLine()) {
                 String line = findLine.nextLine();
@@ -161,7 +164,6 @@ public class Admin extends JFrame {
                 {
 
                     updateStock.write(line);
-                    System.out.println(updateEntry);
                     break;
 
                 }
@@ -176,8 +178,42 @@ public class Admin extends JFrame {
             e.printStackTrace();
         }
     }
+public void lowItems(JTextArea lowStock){
+
+
+    try {
+        Scanner in = new Scanner(Stocktext);
+        while (in.hasNextLine()) {
+
+            String s = in.nextLine();
+            String[] sArray = s.split("\\|");
+
+
+            if ( Integer.parseInt(sArray[1]) < 100) {
+
+                lowStock.append(sArray[0] + "\n");
+                System.out.println(sArray[0]);
+
+
+
+            }
+
+        }
+
+        in.close();
+
+    } catch (FileNotFoundException e) {
+        JOptionPane.showMessageDialog(null,
+                "Text File not found", "Error",
+                JOptionPane.ERROR_MESSAGE);
+
+
+    }
 
 }
+}
+
+
 
 
 

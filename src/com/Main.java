@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Main {
+public class Main extends JFrame {
 
     public static App appView;
     public static String filePath = "resources\\Stock";
@@ -50,6 +50,7 @@ public class Main {
 
 
 
+
                 float PriceToFloat = Float.parseFloat(dataStock[2]);
                 models[counter].setPrice(PriceToFloat);
 
@@ -64,6 +65,7 @@ public class Main {
 
                 models = Arrays.copyOf(models, counter + 1);
             }
+
 
             models[counter] = new ModelSubject();
 
