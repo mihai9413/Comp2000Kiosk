@@ -4,6 +4,7 @@ package com.application.view;
 import com.Main;
 import com.application.Admin;
 import com.application.KeyValuePair;
+import com.application.Payment;
 import com.application.controller.AbstractController;
 import com.application.model.ModelSubject;
 
@@ -43,6 +44,7 @@ public class App extends AbstractView {
 
 
     Admin admin = new Admin();
+    Payment payment = new Payment();
 
     public App() {
 
@@ -164,7 +166,16 @@ tabbedPane.setEnabledAt(1,false);
             public void actionPerformed(ActionEvent e) {
             Kiosk.Scan( scanbarcode.getText(),kioskList,totalText);
 
-
+            }
+        });
+        CASHButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String kiosktext;
+                String totallabel;
+                totallabel = totalText.getText();
+                kiosktext= kioskList.getText();
+                Payment.cashPayment(kiosktext,totallabel);
             }
         });
     }
