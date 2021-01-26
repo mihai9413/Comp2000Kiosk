@@ -31,7 +31,7 @@ public class ModelSubject implements IModelSubject {
     public void setProductName(String ProductName) {
         this.ProductName = ProductName;
         onPropertyChanged(new KeyValuePair(AbstractController.PRODUCT_NAME, this.ProductName));
-//        System.out.println(this.ProductName);
+
     }
 
     public int getQuantity() {
@@ -41,7 +41,7 @@ public class ModelSubject implements IModelSubject {
     public void setQuantity(int Quantity) {
         this.Quantity = Quantity;
         onPropertyChanged(new KeyValuePair(AbstractController.QUANTITY, this.Quantity));
-//        System.out.println(this.Quantity);
+
 
     }
 
@@ -52,7 +52,7 @@ public class ModelSubject implements IModelSubject {
     public void setPrice(float Price) {
         this.Price = Price;
         onPropertyChanged(new KeyValuePair(AbstractController.PRICE, this.Price));
-        System.out.println(this.Price);
+
 
     }
 
@@ -63,7 +63,7 @@ public class ModelSubject implements IModelSubject {
     public void setBarcode(int Barcode) {
         this.Barcode = Barcode;
         onPropertyChanged(new KeyValuePair(AbstractController.BARCODE, this.Barcode));
-        System.out.println(this.Barcode);
+
     }
 
 

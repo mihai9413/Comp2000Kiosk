@@ -165,6 +165,8 @@ tabbedPane.setEnabledAt(1,false);
             @Override
             public void actionPerformed(ActionEvent e) {
             Kiosk.Scan( scanbarcode.getText(),kioskList,totalText);
+            Kiosk.Removefromstock(ProdName.getText(),qtyField.getText(), priceField.getText()
+                    ,scanbarcode.getText());
 
             }
         });
@@ -176,6 +178,16 @@ tabbedPane.setEnabledAt(1,false);
                 totallabel = totalText.getText();
                 kiosktext= kioskList.getText();
                 Payment.cashPayment(kiosktext,totallabel);
+            }
+        });
+        CARDButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String kiosktext;
+                String totallabel;
+                totallabel = totalText.getText();
+                kiosktext= kioskList.getText();
+                Payment.cardPayment(kiosktext,totallabel);
             }
         });
     }
